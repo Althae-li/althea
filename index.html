@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>东瀛漫游 · 日本七日旅行手记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== Design Tokens ===== */
+:root {
+  --bg: #FAF6F0;
+  --bg-warm: #F3EDE3;
+  --bg-deep: #1C1917;
+  --surface: #FFFEFB;
+  --ink: #1C1917;
+  --ink-soft: #44403C;
+  --muted: #78716C;
+  --line: #E7E0D5;
+  --accent: #C2410C;
+  --accent-light: #EA580C;
+  --accent-deep: #9A3412;
+  --teal: #0F4C5C;
+  --teal-light: #2A6F7E;
+  --gold: #B45309;
+  --green: #3F6212;
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-display: 'Playfair Display', 'Noto Serif SC', serif;
+  --font-serif: 'Noto Serif SC', 'Playfair Display', serif;
+  --font-sans: 'Inter', 'Noto Sans SC', sans-serif;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* ===== Typography ===== */
+.display { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; }
+.serif { font-family: var(--font-serif); }
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ===== Navigation ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 1.25rem 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.4s var(--ease-out-quart);
+  background: transparent;
+}
+.nav.scrolled {
+  background: rgba(250, 246, 240, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.75rem 2.5rem;
+  box-shadow: 0 1px 0 var(--line);
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+  transition: color 0.4s;
+}
+.nav.scrolled .nav-brand { color: var(--ink); }
+.nav-brand span { color: var(--accent-light); }
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-links a {
+  font-size: 0.85rem; font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  transition: color 0.3s;
+  position: relative;
+}
+.nav.scrolled .nav-links a { color: var(--ink-soft); }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width 0.3s var(--ease-out-quart);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--accent); }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.nav-toggle span { width: 26px; height: 2px; background: #fff; transition: all 0.3s; }
+.nav.scrolled .nav-toggle span { background: var(--ink); }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative; height: 100vh; min-height: 640px;
+  display: flex; align-items: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('images/hero-fuji3.jpg') center/cover no-repeat;
+  transform: scale(1.05);
+  transition: transform 0.1s linear;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(28,25,23,0.3) 0%, rgba(28,25,23,0.1) 40%, rgba(28,25,23,0.75) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 2.5rem 5rem;
+  max-width: 1400px; margin: 0 auto; width: 100%;
+}
+.hero-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 9vw, 7rem);
+  font-weight: 900;
+  line-height: 0.95;
+  color: #fff;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+.hero-title .accent { font-style: italic; font-weight: 400; color: var(--accent-light); }
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: rgba(255,255,255,0.85);
+  max-width: 580px;
+  margin-top: 1.5rem;
+  line-height: 1.6;
+}
+.hero-meta {
+  display: flex; gap: 2.5rem; margin-top: 2rem;
+  flex-wrap: wrap;
+}
+.hero-meta-item { color: rgba(255,255,255,0.7); }
+.hero-meta-item strong {
+  display: block; font-family: var(--font-display);
+  font-size: 1.8rem; font-weight: 700; color: #fff;
+}
+.hero-meta-item span { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; }
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.hero-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6));
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+.hero-scroll span { font-size: 0.7rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+
+/* ===== Section Common ===== */
+.section { padding: 7rem 2.5rem; }
+.section-header { max-width: 1400px; margin: 0 auto 4rem; }
+.section-header .eyebrow { margin-bottom: 1rem; display: block; }
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+.section-title .italic { font-style: italic; font-weight: 400; color: var(--accent); }
+.section-desc {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 560px;
+  margin-top: 1.2rem;
+  line-height: 1.8;
+}
+
+/* ===== Intro Stats ===== */
+.intro {
+  background: var(--bg-deep);
+  color: #fff;
+  padding: 5rem 2.5rem;
+}
+.intro-inner { max-width: 1400px; margin: 0 auto; }
+.intro-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  line-height: 1.6;
+  color: rgba(255,255,255,0.9);
+  max-width: 900px;
+  margin-bottom: 3rem;
+}
+.intro-text em { color: var(--accent-light); font-style: normal; font-weight: 700; }
+.intro-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 3rem;
+}
+.intro-stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 3rem; font-weight: 900;
+  color: var(--accent-light);
+  line-height: 1;
+}
+.intro-stat span { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem; display: block; }
+
+/* ===== Itinerary Timeline ===== */
+.timeline { max-width: 1100px; margin: 0 auto; position: relative; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 50%; top: 0; bottom: 0;
+  width: 2px; background: var(--line);
+  transform: translateX(-50%);
+}
+.tl-item {
+  display: flex; align-items: center;
+  margin-bottom: 3.5rem;
+  position: relative;
+}
+.tl-item:nth-child(even) { flex-direction: row-reverse; }
+.tl-card {
+  width: 45%;
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(28,25,23,0.06);
+  transition: transform 0.4s var(--ease-out-quart), box-shadow 0.4s;
+}
+.tl-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(28,25,23,0.12);
+}
+.tl-img {
+  height: 200px; overflow: hidden; position: relative;
+}
+.tl-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s var(--ease-out-quart);
+}
+.tl-card:hover .tl-img img { transform: scale(1.08); }
+.tl-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,25,23,0.4), transparent 50%);
+}
+.tl-day {
+  position: absolute; top: 1rem; left: 1rem; z-index: 2;
+  font-family: var(--font-display);
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  background: rgba(194,65,12,0.9);
+  border-radius: 100px;
+}
+.tl-body { padding: 1.5rem 1.8rem; }
+.tl-body h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem; font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.tl-body .tl-loc {
+  font-size: 0.8rem; color: var(--accent);
+  font-weight: 600; letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+.tl-body p { font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+.tl-body .tl-tags { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+.tl-body .tl-tag {
+  font-size: 0.7rem; padding: 0.2rem 0.7rem;
+  background: var(--bg-warm); color: var(--ink-soft);
+  border-radius: 100px; font-weight: 500;
+}
+.tl-dot {
+  position: absolute; left: 50%; top: 50%;
+  width: 16px; height: 16px;
+  background: var(--accent);
+  border: 4px solid var(--bg);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 0 0 4px rgba(194,65,12,0.15);
+}
+
+/* ===== Food Section ===== */
+.food { background: var(--bg-warm); }
+.food-filter {
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.food-btn {
+  padding: 0.6rem 1.4rem;
+  border: 1.5px solid var(--line);
+  border-radius: 100px;
+  font-size: 0.85rem; font-weight: 500;
+  color: var(--ink-soft);
+  transition: all 0.3s var(--ease-out-quart);
+}
+.food-btn:hover { border-color: var(--accent); color: var(--accent); }
+.food-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.food-card {
+  background: var(--surface);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out-quart), opacity 0.4s, box-shadow 0.4s;
+  box-shadow: 0 2px 12px rgba(28,25,23,0.04);
+}
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(28,25,23,0.1);
+}
+.food-card.hidden { display: none; }
+.food-img { height: 220px; overflow: hidden; position: relative; }
+.food-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-out-quart); }
+.food-card:hover .food-img img { transform: scale(1.08); }
+.food-badge {
+  position: absolute; top: 1rem; right: 1rem;
+  background: rgba(255,255,255,0.95);
+  padding: 0.3rem 0.8rem;
+  border-radius: 100px;
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--accent);
+}
+.food-info { padding: 1.5rem; }
+.food-info h3 { font-family: var(--font-serif); font-size: 1.2rem; margin-bottom: 0.3rem; }
+.food-info .food-jp { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.8rem; font-style: italic; }
+.food-info p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 1rem; }
+.food-meta { display: flex; justify-content: space-between; align-items: center; }
+.food-price { font-family: var(--font-display); font-weight: 700; color: var(--teal); font-size: 1.1rem; }
+.food-stars { color: var(--accent); font-size: 0.85rem; letter-spacing: 2px; }
+
+/* ===== Photo Gallery ===== */
+.gallery { max-width: 1400px; margin: 0 auto; }
+.gallery-masonry {
+  columns: 3;
+  column-gap: 1.2rem;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-out-quart);
+}
+.gallery-item:hover { transform: scale(1.02); }
+.gallery-item img { width: 100%; transition: transform 0.6s var(--ease-out-quart); }
+.gallery-item:hover img { transform: scale(1.08); }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,25,23,0.8) 0%, transparent 60%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-quart);
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay h4 { color: #fff; font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 0.2rem; }
+.gallery-overlay span { color: rgba(255,255,255,0.7); font-size: 0.8rem; }
+
+/* ===== Lightbox ===== */
+.lightbox {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(28,25,23,0.95);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s var(--ease-out-quart);
+}
+.lightbox.open { opacity: 1; pointer-events: auto; }
+.lightbox img { max-width: 85vw; max-height: 80vh; border-radius: 8px; }
+.lightbox-close {
+  position: absolute; top: 2rem; right: 2rem;
+  width: 44px; height: 44px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  color: #fff; font-size: 1.2rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+.lightbox-caption {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.8);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+}
+
+/* ===== Experiences ===== */
+.experience { background: var(--bg-warm); }
+.exp-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto 6rem;
+}
+.exp-block:last-child { margin-bottom: 0; }
+.exp-block.reverse .exp-img { order: 2; }
+.exp-img {
+  border-radius: 20px;
+  overflow: hidden;
+  height: 480px;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(28,25,23,0.1);
+}
+.exp-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease-out-quart); }
+.exp-block:hover .exp-img img { transform: scale(1.05); }
+.exp-num {
+  position: absolute; top: 1.5rem; left: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 4rem; font-weight: 900;
+  color: rgba(255,255,255,0.3);
+  line-height: 1;
+}
+.exp-content .eyebrow { margin-bottom: 1rem; }
+.exp-content h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1.2rem;
+}
+.exp-content p { color: var(--ink-soft); line-height: 1.9; margin-bottom: 1.5rem; }
+.exp-tips {
+  display: flex; flex-direction: column; gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+.exp-tip {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  font-size: 0.9rem; color: var(--muted);
+}
+.exp-tip svg { flex-shrink: 0; margin-top: 3px; color: var(--accent); }
+
+/* ===== Accommodation & Transport ===== */
+.logistics { max-width: 1300px; margin: 0 auto; }
+.logi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.logi-col h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem; font-weight: 700;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+.logi-card {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 1.8rem;
+  margin-bottom: 1.2rem;
+  display: flex; gap: 1.2rem;
+  align-items: flex-start;
+  transition: transform 0.3s var(--ease-out-quart), box-shadow 0.3s;
+  box-shadow: 0 2px 8px rgba(28,25,23,0.04);
+}
+.logi-card:hover { transform: translateX(6px); box-shadow: 0 6px 20px rgba(28,25,23,0.08); }
+.logi-icon {
+  flex-shrink: 0;
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-warm);
+  color: var(--accent);
+}
+.logi-info h4 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 0.3rem; }
+.logi-info p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+.logi-info .logi-price {
+  display: inline-block; margin-top: 0.6rem;
+  font-family: var(--font-display); font-weight: 700;
+  color: var(--teal); font-size: 0.95rem;
+}
+
+/* ===== Adventure ===== */
+.adventure {
+  background: var(--bg-deep);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.adventure::before {
+  content: ''; position: absolute;
+  top: -50%; right: -20%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(194,65,12,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.adventure .section-title { color: #fff; }
+.adventure .section-desc { color: rgba(255,255,255,0.6); }
+.adv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+}
+.adv-card {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  height: 380px;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-out-quart);
+}
+.adv-card:hover { transform: translateY(-6px); }
+.adv-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-out-quart); }
+.adv-card:hover img { transform: scale(1.08); }
+.adv-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,25,23,0.9) 0%, rgba(28,25,23,0.2) 60%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.8rem;
+  transition: background 0.4s;
+}
+.adv-card:hover .adv-overlay {
+  background: linear-gradient(to top, rgba(28,25,23,0.95) 0%, rgba(194,65,12,0.3) 60%, transparent 100%);
+}
+.adv-level {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 100px;
+  margin-bottom: 0.8rem;
+  align-self: flex-start;
+}
+.adv-level.easy { background: rgba(63,98,18,0.8); color: #d9f99d; }
+.adv-level.med { background: rgba(180,83,9,0.8); color: #fde68a; }
+.adv-level.hard { background: rgba(194,65,12,0.8); color: #fed7aa; }
+.adv-overlay h3 { font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 0.5rem; }
+.adv-overlay p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--bg-deep);
+  color: rgba(255,255,255,0.6);
+  padding: 4rem 2.5rem 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-inner { max-width: 1300px; margin: 0 auto; }
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 2rem; margin-bottom: 3rem;
+}
+.footer-brand { font-family: var(--font-display); font-size: 2rem; font-weight: 900; color: #fff; }
+.footer-brand span { color: var(--accent-light); }
+.footer-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 400px;
+  line-height: 1.7;
+}
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.8rem;
+  flex-wrap: wrap; gap: 1rem;
+}
+.back-top {
+  display: flex; align-items: center; gap: 0.5rem;
+  color: var(--accent-light); font-size: 0.85rem;
+  transition: gap 0.3s;
+}
+.back-top:hover { gap: 0.8rem; }
+
+/* ===== Scroll Reveal ===== */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ===== Image Fallback ===== */
+.img-fallback {
+  background: linear-gradient(135deg, var(--bg-warm), var(--line));
+  display: flex; align-items: center; justify-content: center;
+}
+.img-fallback::after {
+  content: ''; font-size: 2rem; opacity: 0.3;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 968px) {
+  .nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg); padding: 2rem 1.5rem; gap: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .nav-links.open a { color: var(--ink-soft); }
+  .section { padding: 5rem 1.5rem; }
+  .hero-content { padding: 0 1.5rem 4rem; }
+  .timeline::before { left: 24px; }
+  .tl-item, .tl-item:nth-child(even) { flex-direction: row; }
+  .tl-card { width: calc(100% - 60px); margin-left: 60px; }
+  .tl-dot { left: 24px; }
+  .gallery-masonry { columns: 2; }
+  .exp-block, .exp-block.reverse { grid-template-columns: 1fr; gap: 2rem; }
+  .exp-block.reverse .exp-img { order: 0; }
+  .exp-img { height: 320px; }
+  .logi-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-meta { gap: 1.5rem; }
+}
+@media (max-width: 600px) {
+  .gallery-masonry { columns: 1; }
+  .food-grid { grid-template-columns: 1fr; }
+  .hero-meta-item strong { font-size: 1.4rem; }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Navigation ===== -->
+<nav class="nav" id="nav">
+  <a href="#hero" class="nav-brand">东瀛<span>漫游</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#itinerary">行程大纲</a>
+    <a href="#food">饮食推荐</a>
+    <a href="#photos">打卡拍照</a>
+    <a href="#experience">特色体验</a>
+    <a href="#logistics">住宿交通</a>
+    <a href="#adventure">趣味冒险</a>
+  </div>
+  <div class="nav-toggle" id="navToggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Travel Journal · 2026 Spring</span>
+    <h1 class="hero-title">东瀛<span class="accent">漫游</span></h1>
+    <p class="hero-subtitle">从东京的霓虹街巷到京都的千年古寺，从富士山的晨曦到道顿堀的烟火气——七日行走，丈量一个国家的古与今。</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <strong>7</strong>
+        <span>Days 行程天数</span>
+      </div>
+      <div class="hero-meta-item">
+        <strong>3</strong>
+        <span>Cities 城市</span>
+      </div>
+      <div class="hero-meta-item">
+        <strong>42</strong>
+        <span>Spots 打卡地点</span>
+      </div>
+      <div class="hero-meta-item">
+        <strong>¥1.2w</strong>
+        <span>Budget 人均预算</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== Intro ===== -->
+<section class="intro">
+  <div class="intro-inner">
+    <p class="intro-text reveal">
+      这不是一份面面俱到的旅行指南，而是一个旅人的私人手记。<em>东京的喧嚣</em>、<em>京都的静谧</em>、<em>大阪的豪爽</em>——每一座城市都有自己的呼吸节奏。我在樱花将开未开的四月出发，用七天时间，记录下值得回味每一帧。
+    </p>
+    <div class="intro-stats">
+      <div class="intro-stat reveal reveal-delay-1">
+        <strong>2,847</strong>
+        <span>公里 行程总距离</span>
+      </div>
+      <div class="intro-stat reveal reveal-delay-1">
+        <strong>186</strong>
+        <span>张 精选照片</span>
+      </div>
+      <div class="intro-stat reveal reveal-delay-2">
+        <strong>28</strong>
+        <span>家 饮食探店</span>
+      </div>
+      <div class="intro-stat reveal reveal-delay-2">
+        <strong>12</strong>
+        <span>项 特色体验</span>
+      </div>
+      <div class="intro-stat reveal reveal-delay-3">
+        <strong>9.4</strong>
+        <span>/10 旅途满意度</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Itinerary ===== -->
+<section class="section" id="itinerary">
+  <div class="section-header reveal">
+    <span class="eyebrow">Itinerary · 行程大纲</span>
+    <h2 class="section-title">七日<span class="italic">行迹</span></h2>
+    <p class="section-desc">从成田机场落地的那一刻起，每一天都有明确的主题与节奏。以下是完整的行程脉络，可根据体力与兴趣灵活调整。</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-img">
+          <span class="tl-day">Day 01</span>
+          <img src="images/tokyo-night.jpg" alt="东京夜景" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="tl-body">
+          <h3>抵达东京 · 初遇霓虹</h3>
+          <p class="tl-loc">成田机场 → 浅草 · 晴空塔</p>
+          <p>下午抵达成田机场，乘坐 Skyliner 直达市区。傍晚漫步浅草寺，仰望晴空塔的灯光点亮整片夜空，正式开启日本之旅。</p>
+          <div class="tl-tags"><span class="tl-tag">浅草寺</span><span class="tl-tag">晴空塔</span><span class="tl-tag">Skyliner</span></div>
+        </div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-img">
+          <span class="tl-day">Day 02</span>
+          <img src="images/shibuya.jpg" alt="涩谷" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="tl-body">
+          <h3>东京漫步 · 潮流心脏</h3>
+          <p class="tl-loc">涩谷 · 原宿 · 明治神宫</p>
+          <p>清晨在明治神宫感受都市中的森林静谧，午后穿梭原宿竹下通的潮流店铺，傍晚在涩谷十字路口记录全世界最繁忙的人流交错。</p>
+          <div class="tl-tags"><span class="tl-tag">明治神宫</span><span class="tl-tag">涩谷十字路口</span><span class="tl-tag">原宿</span></div>
+        </div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-img">
+          <span class="tl-day">Day 03</span>
+          <img src="images/hero-fuji3.jpg" alt="富士山" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="tl-body">
+          <h3>东京 → 富士山 · 圣山朝拜</h3>
+          <p class="tl-loc">河口湖 · 忍野八海</p>
+          <p>搭乘富士急行线前往河口湖，在湖畔捕捉富士山的完美倒影。午后漫步忍野八海的清澈涌泉，傍晚入住温泉旅馆享受露天风吕。</p>
+          <div class="tl-tags"><span class="tl-tag">河口湖</span><span class="tl-tag">忍野八海</span><span class="tl-tag">温泉旅馆</span></div>
+        </div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-img">
+          <span class="tl-day">Day 04</span>
+          <img src="images/torii.jpg" alt="伏见稻荷" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="tl-body">
+          <h3>富士山 → 京都 · 千本鸟居</h3>
+          <p class="tl-loc">伏见稻荷大社 · 祇园花见小路</p>
+          <p>新干线一路西行抵达京都。午后直奔伏见稻荷大社，穿越万千朱红鸟居的震撼长廊。傍晚在祇园花见小路偶遇艺伎的优雅身影。</p>
+          <div class="tl-tags"><span class="tl-tag">新干线</span><span class="tl-tag">伏见稻荷</span><span class="tl-tag">祇园</span></div>
+        </div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-img">
+          <span class="tl-day">Day 05</span>
+          <img src="images/bamboo.jpg" alt="岚山竹林" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="tl-body">
+          <h3>京都古韵 · 千年回响</h3>
+          <p class="tl-loc">清水寺 · 金阁寺 · 岚山竹林</p>
+          <p>清晨在清水寺俯瞰京都全景，午后拜访金阁寺的金色倒影，傍晚漫步岚山竹林小径，听竹叶在风中沙沙作响，感受最纯粹的日式美学。</p>
+          <div class="tl-tags"><span class="tl-tag">清水寺</span><span class="tl-tag">金阁寺</span><span class="tl-tag">岚山</span></div>
+        </div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-img">
+          <span class="tl-day">Day 06</span>
+          <img src="images/temple.jpg" alt="大阪城" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="tl-body">
+          <h3>京都 → 大阪 · 天下厨房</h3>
+          <p class="tl-loc">大阪城 · 道顿堀</p>
+          <p>短途列车半小时抵达大阪。上午参观宏伟的大阪城天守阁，傍晚扎进道顿堀的美食海洋——章鱼烧、大阪烧、炸串，吃到扶墙而出。</p>
+          <div class="tl-tags"><span class="tl-tag">大阪城</span><span class="tl-tag">道顿堀</span><span class="tl-tag">街头美食</span></div>
+        </div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-card">
+        <div class="tl-img">
+          <span class="tl-day">Day 07</span>
+          <img src="images/kyoto-street.jpg" alt="心斋桥" onerror="this.parentElement.classList.add('img-fallback')">
+        </div>
+        <div class="tl-body">
+          <h3>大阪收官 · 购物与告别</h3>
+          <p class="tl-loc">心斋桥 · 关西机场</p>
+          <p>最后一天在心斋桥筋商店街尽情扫货——药妆、电器、零食满载而归。下午前往关西国际机场，带着满满的回忆踏上归途。</p>
+          <div class="tl-tags"><span class="tl-tag">心斋桥购物</span><span class="tl-tag">药妆扫货</span><span class="tl-tag">关西机场</span></div>
+        </div>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Food ===== -->
+<section class="section food" id="food">
+  <div class="section-header reveal">
+    <span class="eyebrow">Food · 饮食推荐</span>
+    <h2 class="section-title">舌尖上的<span class="italic">东瀛</span></h2>
+    <p class="section-desc">从一碗豚骨拉面的浓郁，到一碟握寿司的极简——日本美食的精髓在于对食材的敬畏与对技艺的执着。以下是精选探店清单。</p>
+  </div>
+  <div class="reveal">
+    <div class="food-filter">
+      <button class="food-btn active" data-cat="all">全部</button>
+      <button class="food-btn" data-cat="ramen">拉面</button>
+      <button class="food-btn" data-cat="sushi">寿司</button>
+      <button class="food-btn" data-cat="dessert">甜品</button>
+      <button class="food-btn" data-cat="street">街头小吃</button>
+    </div>
+  </div>
+  <div class="food-grid reveal reveal-delay-1">
+    <div class="food-card" data-cat="ramen">
+      <div class="food-img">
+        <span class="food-badge">必吃</span>
+        <img src="images/ramen.jpg" alt="一兰拉面" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>一兰拉面</h3>
+        <div class="food-jp">Ichiran Ramen · 福岡発祥</div>
+        <p>博多豚骨白汤的代表，独创格子座位让每位食客专注品味。汤头浓厚却不腻，细直面挂汁完美，叉烧入口即化。</p>
+        <div class="food-meta">
+          <span class="food-price">¥980</span>
+          <span class="food-stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-card" data-cat="ramen">
+      <div class="food-img">
+        <img src="images/afuri.jpg" alt="阿夫利拉面" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>AFURI 阿夫利</h3>
+        <div class="food-jp">AFURI · 柚子盐拉面</div>
+        <p>清爽柚子盐风味，汤头透亮金黄，柑橘清香与豚骨鲜味平衡得恰到好处。适合吃完重口味后换换口味的完美选择。</p>
+        <div class="food-meta">
+          <span class="food-price">¥1,200</span>
+          <span class="food-stars">★★★★☆</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-card" data-cat="sushi">
+      <div class="food-img">
+        <span class="food-badge">推荐</span>
+        <img src="images/sushi.jpg" alt="寿司" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>寿司大</h3>
+        <div class="food-jp">Sushi Dai · 筑地市场</div>
+        <p>筑地市场搬迁后仍在丰洲保留传奇地位。板前师傅在你面前逐一捏制，大TORO的油脂在口中融化的一瞬间，值得排队两小时。</p>
+        <div class="food-meta">
+          <span class="food-price">¥4,000</span>
+          <span class="food-stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-card" data-cat="sushi">
+      <div class="food-img">
+        <img src="images/kura-sushi.jpg" alt="回转寿司" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>藏寿司</h3>
+        <div class="food-jp">Kura Sushi · 回转寿司</div>
+        <p>平价回转寿司的性价比之王。每盘108日元起，吃完空盘投入回收口还有扭蛋游戏，趣味与美味兼得。带小朋友的必选。</p>
+        <div class="food-meta">
+          <span class="food-price">¥108/盘</span>
+          <span class="food-stars">★★★★☆</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-card" data-cat="dessert">
+      <div class="food-img">
+        <span class="food-badge">网红</span>
+        <img src="images/matcha.jpg" alt="抹茶甜品" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>茶寮都路里</h3>
+        <div class="food-jp">Tsujiri · 宇治抹茶</div>
+        <p>京都宇治抹茶甜品的殿堂级名店。抹茶巴菲层层叠叠——抹茶冰淇淋、白玉团子、红豆泥、抹茶冻，每一层都是不同质感的惊喜。</p>
+        <div class="food-meta">
+          <span class="food-price">¥1,280</span>
+          <span class="food-stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-card" data-cat="dessert">
+      <div class="food-img">
+        <img src="images/wagashi.jpg" alt="和果子" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>中村藤吉</h3>
+        <div class="food-jp">Nakamura Tokichi · 和果子</div>
+        <p>百年老铺的抹茶生巧与季节限定和果子，入口是抹茶的微苦回甘，收尾是奶油的温润甜香。适合作为伴手礼带回。</p>
+        <div class="food-meta">
+          <span class="food-price">¥880</span>
+          <span class="food-stars">★★★★☆</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-card" data-cat="street">
+      <div class="food-img">
+        <img src="images/takoyaki.jpg" alt="章鱼烧" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>本家 大たこ</h3>
+        <div class="food-jp">Honke Dotonbori Takoyaki · 大阪</div>
+        <p>道顿堀最具代表性的章鱼烧老铺。外皮酥脆内里软糯，大颗章鱼足弹牙鲜甜，淋上酱汁撒上海苔木鱼花，大阪的灵魂街头味。</p>
+        <div class="food-meta">
+          <span class="food-price">¥600</span>
+          <span class="food-stars">★★★★★</span>
+        </div>
+      </div>
+    </div>
+    <div class="food-card" data-cat="street">
+      <div class="food-img">
+        <img src="images/okonomiyaki.jpg" alt="大阪烧" onerror="this.parentElement.classList.add('img-fallback')">
+      </div>
+      <div class="food-info">
+        <h3>千房 大阪烧</h3>
+        <div class="food-jp">Chibo Okonomiyaki · 道顿堀</div>
+        <p>铁板上滋滋作响的大阪烧，卷心菜的脆甜、面糊的焦香与猪花的油脂交融。自己动手翻面更有参与感，这是大阪的美食DNA。</p>
+        <div class="food-meta">
+          <span class="food-price">¥1,300</span>
+          <span class="food-stars">★★★★☆</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Photo Gallery ===== -->
+<section class="section" id="photos">
+  <div class="section-header reveal">
+    <span class="eyebrow">Photo Spots · 打卡拍照</span>
+    <h2 class="section-title">光影<span class="italic">定格</span></h2>
+    <p class="section-desc">每一张照片都是一段凝固的时光。从伏见稻荷的千本鸟居到岚山的翠竹长廊，这些是旅途中最值得按下快门的瞬间。点击图片查看大图。</p>
+  </div>
+  <div class="gallery reveal">
+    <div class="gallery-masonry">
+      <div class="gallery-item" data-src="images/torii.jpg" data-caption="伏见稻荷大社 · 千本鸟居">
+        <img src="images/torii.jpg" alt="伏见稻荷">
+        <div class="gallery-overlay">
+          <h4>伏见稻荷大社</h4>
+          <span>京都 · 千本鸟居</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/shibuya.jpg" data-caption="涩谷十字路口 · 全世界最繁忙的人流">
+        <img src="images/shibuya.jpg" alt="涩谷">
+        <div class="gallery-overlay">
+          <h4>涩谷十字路口</h4>
+          <span>东京 · 最繁忙的十字路口</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/bamboo.jpg" data-caption="岚山竹林 · 翠绿长廊">
+        <img src="images/bamboo.jpg" alt="岚山竹林">
+        <div class="gallery-overlay">
+          <h4>岚山竹林</h4>
+          <span>京都 · 翠竹长廊</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/sakura.jpg" data-caption="樱花隧道 · 春日限定浪漫">
+        <img src="images/sakura.jpg" alt="樱花">
+        <div class="gallery-overlay">
+          <h4>樱花隧道</h4>
+          <span>东京 · 春日限定</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/garden.jpg" data-caption="日式庭园 · 枯山水之美">
+        <img src="images/garden.jpg" alt="日式庭园">
+        <div class="gallery-overlay">
+          <h4>日式庭园</h4>
+          <span>京都 · 枯山水</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/hero-fuji3.jpg" data-caption="富士山 · 河口湖倒影">
+        <img src="images/hero-fuji3.jpg" alt="富士山">
+        <div class="gallery-overlay">
+          <h4>富士山</h4>
+          <span>河口湖 · 完美倒影</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/tokyo-night.jpg" data-caption="东京塔夜景 · 城市灯火">
+        <img src="images/tokyo-night.jpg" alt="东京夜景">
+        <div class="gallery-overlay">
+          <h4>东京塔夜景</h4>
+          <span>东京 · 城市灯火</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/temple.jpg" data-caption="金阁寺 · 金色倒映">
+        <img src="images/temple.jpg" alt="寺庙">
+        <div class="gallery-overlay">
+          <h4>古寺金阁</h4>
+          <span>京都 · 金色倒映</span>
+        </div>
+      </div>
+      <div class="gallery-item" data-src="images/kyoto-street.jpg" data-caption="京都老街 · 时光凝固">
+        <img src="images/kyoto-street.jpg" alt="京都街道">
+        <div class="gallery-overlay">
+          <h4>京都老街</h4>
+          <span>京都 · 时光凝固</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Lightbox ===== -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="关闭">✕</button>
+  <img src="" alt="" id="lightboxImg">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ===== Experiences ===== -->
+<section class="section experience" id="experience">
+  <div class="section-header reveal">
+    <span class="eyebrow">Experiences · 特色体验</span>
+    <h2 class="section-title">沉浸式<span class="italic">体验</span></h2>
+    <p class="section-desc">旅行的意义不在于打卡，而在于沉浸。以下四项深度体验，让你从观光客变成参与者，真正触摸日本文化的肌理。</p>
+  </div>
+
+  <div class="exp-block reveal">
+    <div class="exp-img">
+      <span class="exp-num">01</span>
+      <img src="images/tea2.jpg" alt="茶道体验" onerror="this.parentElement.classList.add('img-fallback')">
+    </div>
+    <div class="exp-content">
+      <span class="eyebrow">Tea Ceremony</span>
+      <h3>茶道 · 一期一会的禅意</h3>
+      <p>在京都百年茶室中，身着和服的茶师为你点一碗抹茶。从折扇的摆放角度到茶筅的搅动节奏，每一个细节都是千年传承的仪式感。这不是喝茶，而是用五感体验日本美学中"侘寂"的真谛。</p>
+      <div class="exp-tips">
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>体验时长约 90 分钟，建议提前一周预约</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>推荐茶室：京都 祇园 圆山公园周边</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>费用约 ¥3,000-5,000/人，含和果子</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-block reverse reveal">
+    <div class="exp-img">
+      <span class="exp-num">02</span>
+      <img src="images/onsen.jpg" alt="温泉体验" onerror="this.parentElement.classList.add('img-fallback')">
+    </div>
+    <div class="exp-content">
+      <span class="eyebrow">Onsen · 温泉</span>
+      <h3>温泉 · 与山水共浴</h3>
+      <p>在河口湖畔的露天温泉中，眼前是富士山的皑皑雪顶，耳畔是风吹松林的沙沙声。温泉水富含矿物质，旅途疲惫在热气蒸腾中消融。这是日本独有的"裸汤文化"——褪去衣物，也褪去心防。</p>
+      <div class="exp-tips">
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>建议入住一泊二食温泉旅馆，体验完整流程</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>推荐地区：河口湖、箱根、草津温泉</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>一泊二食约 ¥15,000-30,000/人</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-block reveal">
+    <div class="exp-img">
+      <span class="exp-num">03</span>
+      <img src="images/kimono.jpg" alt="和服体验" onerror="this.parentElement.classList.add('img-fallback')">
+    </div>
+    <div class="exp-content">
+      <span class="eyebrow">Kimono · 和服</span>
+      <h3>和服 · 穿在身上的传统</h3>
+      <p>在京都的和服租赁店挑选一套心仪的振袖或浴衣，由专业师傅为你穿戴整理。踩着木屐走在石板小路上，经过古寺与町屋，仿佛穿越回了百年前的京都。清水寺和祇园是最佳的和服拍摄背景。</p>
+      <div class="exp-tips">
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>含穿脱约需 1 小时，建议上午租借全天使用</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>推荐店铺：梦館、着物 rental VASARA</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>租赁费 ¥3,000-6,000/天，含发型设计</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exp-block reverse reveal">
+    <div class="exp-img">
+      <span class="exp-num">04</span>
+      <img src="images/sushi-make.jpg" alt="寿司制作" onerror="this.parentElement.classList.add('img-fallback')">
+    </div>
+    <div class="exp-content">
+      <span class="eyebrow">Sushi Making</span>
+      <h3>寿司制作 · 板前的修行</h3>
+      <p>在筑地市场旁的寿司教室，跟随三十年经验的板前师傅学习握寿司的技艺。从选鱼、切身到握饭的角度与力度，亲手完成一贯属于自己的寿司。吃自己做的寿司，味道格外不同。</p>
+      <div class="exp-tips">
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>体验时长约 2 小时，含 8-10 贯寿司</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>推荐：Tokyo Sushi Academy、筑地寿司好</span>
+        </div>
+        <div class="exp-tip">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span>费用约 ¥8,000-12,000/人</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Logistics ===== -->
+<section class="section" id="logistics">
+  <div class="section-header reveal">
+    <span class="eyebrow">Logistics · 住宿交通</span>
+    <h2 class="section-title">出行<span class="italic">指南</span></h2>
+    <p class="section-desc">旅行的一半在于规划。以下住宿区域推荐与交通攻略，帮你省下时间与预算，把精力留给风景与美食。</p>
+  </div>
+  <div class="logistics reveal">
+    <div class="logi-grid">
+      <div class="logi-col">
+        <h3>住宿推荐</h3>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21v-7l9-4 9 4v7"/><path d="M3 21h18"/><path d="M9 21v-4h6v4"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>新宿 · 东京住宿首选</h4>
+            <p>交通枢纽中心，JR、地铁线路交汇，前往箱根、河口湖均从此出发。周边餐饮购物密集，夜生活丰富。商务酒店为主。</p>
+            <span class="logi-price">¥600-1,200/晚</span>
+          </div>
+        </div>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21v-7l9-4 9 4v7"/><path d="M3 21h18"/><path d="M9 21v-4h6v4"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>京都站周边 · 古都落脚</h4>
+            <p>新干线直达，巴士总站在此发车前往各景点。东西本愿寺步行可达，周边超市药妆店齐全，适合作为京都探索的大本营。</p>
+            <span class="logi-price">¥500-1,000/晚</span>
+          </div>
+        </div>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21v-7l9-4 9 4v7"/><path d="M3 21h18"/><path d="M9 21v-4h6v4"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>难波 · 大阪美食腹地</h4>
+            <p>道顿堀、心斋桥步行可达，美食天堂近在咫尺。地铁御堂筋线贯穿南北，前往关西机场有直达列车，方便最后一天出行。</p>
+            <span class="logi-price">¥500-900/晚</span>
+          </div>
+        </div>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21v-7l9-4 9 4v7"/><path d="M3 21h18"/><path d="M9 21v-4h6v4"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>温泉旅馆 · 一泊二食</h4>
+            <p>河口湖或箱根的传统旅馆，含晚餐怀石料理与早餐。露天风吕直面富士山或山林美景，是旅途中不可错过的日式款待体验。</p>
+            <span class="logi-price">¥15,000-30,000/晚</span>
+          </div>
+        </div>
+      </div>
+      <div class="logi-col">
+        <h3>交通攻略</h3>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="16" rx="2"/><line x1="4" y1="11" x2="20" y2="11"/><circle cx="8.5" cy="15" r="1"/><circle cx="15.5" cy="15" r="1"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>JR Pass 全国版</h4>
+            <p>7日券可无限乘坐全国JR线路及新干线（含希望号）。东京-京都-大阪往返即值回票价。需在入境前于海外购买兑换券。</p>
+            <span class="logi-price">7日券 ¥29,650</span>
+          </div>
+        </div>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>Suica / ICOCA 交通卡</h4>
+            <p>储值IC卡，东京用Suica、关西用ICOCA，全国互通。刷卡乘坐地铁、公交、便利店消费，省去每次购票的麻烦。机场即可办理。</p>
+            <span class="logi-price">押金 ¥500</span>
+          </div>
+        </div>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><circle cx="6" cy="16" r="2"/><circle cx="18" cy="16" r="2"/><path d="M4 12l2-6h12l2 6"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>机场到市区交通</h4>
+            <p>成田机场：Skyliner（最快40分钟到上野）或N'EX特快。关西机场：Haruka特快（约50分钟到京都）或南海特急Rap:t（到难波38分钟）。</p>
+            <span class="logi-price">¥1,500-2,500</span>
+          </div>
+        </div>
+        <div class="logi-card">
+          <div class="logi-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20"/><circle cx="6" cy="16" r="2"/><circle cx="18" cy="16" r="2"/><path d="M4 12l2-6h12l2 6"/></svg>
+          </div>
+          <div class="logi-info">
+            <h4>城市内交通Tips</h4>
+            <p>东京地铁线路复杂，善用Google Maps导航。京都以巴士为主，建议购买一日券（¥700）。大阪地铁一日券¥620，当日乘坐3次以上即回本。</p>
+            <span class="logi-price">一日券 ¥620-700</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Adventure ===== -->
+<section class="section adventure" id="adventure">
+  <div class="section-header reveal">
+    <span class="eyebrow">Adventure · 趣味冒险</span>
+    <h2 class="section-title">心跳<span class="italic">加速</span></h2>
+    <p class="section-desc">旅行不只是看风景，更是挑战自我。从攀登富士山到环球影城的尖叫，以下是让肾上腺素飙升的冒险清单。</p>
+  </div>
+  <div class="adv-grid reveal">
+    <div class="adv-card">
+      <img src="images/fuji-climb.jpg" alt="富士山登山" onerror="this.parentElement.classList.add('img-fallback')">
+      <div class="adv-overlay">
+        <span class="adv-level hard">Hard 困难</span>
+        <h3>富士山登山</h3>
+        <p>7-8月登山季开放，夜攀至山顶观日出御来光。海拔3776米，往返约10小时，需提前预约山小屋。</p>
+      </div>
+    </div>
+    <div class="adv-card">
+      <img src="images/usj.jpg" alt="环球影城" onerror="this.parentElement.classList.add('img-fallback')">
+      <div class="adv-overlay">
+        <span class="adv-level easy">Easy 入门</span>
+        <h3>大阪环球影城</h3>
+        <p>超级任天堂世界与哈利波特魔法世界是必玩项目。建议购买快速通票，早起入园直冲热门设施。</p>
+      </div>
+    </div>
+    <div class="adv-card">
+      <img src="images/hiking.jpg" alt="溪谷徒步" onerror="this.parentElement.classList.add('img-fallback')">
+      <div class="adv-overlay">
+        <span class="adv-level med">Medium 中等</span>
+        <h3>高尾山徒步</h3>
+        <p>距东京1小时的"东京人后花园"，缆车或徒步登顶约1.5小时。山顶可远眺富士山，秋季红叶绝美。</p>
+      </div>
+    </div>
+    <div class="adv-card">
+      <img src="images/skiing.jpg" alt="滑雪" onerror="this.parentElement.classList.add('img-fallback')">
+      <div class="adv-overlay">
+        <span class="adv-level med">Medium 中等</span>
+        <h3>白马滑雪</h3>
+        <p>冬季限定的粉雪天堂，长野白马八方地区雪质世界顶级。初学者有教练课程，老手可挑战野雪区。</p>
+      </div>
+    </div>
+    <div class="adv-card">
+      <img src="images/nightlife.jpg" alt="夜生活" onerror="this.parentElement.classList.add('img-fallback')">
+      <div class="adv-overlay">
+        <span class="adv-level easy">Easy 入门</span>
+        <h3>新宿夜生活</h3>
+        <p>歌舞伎町的霓虹与居酒屋的烟火气交织。推荐体验黄金街的小巷酒吧，每家只能坐5-6人，氛围独特。</p>
+      </div>
+    </div>
+    <div class="adv-card">
+      <img src="images/surfing.jpg" alt="冲浪" onerror="this.parentElement.classList.add('img-fallback')">
+      <div class="adv-overlay">
+        <span class="adv-level hard">Hard 困难</span>
+        <h3>镰仓冲浪</h3>
+        <p>距东京1小时的湘南海岸是日本冲浪圣地。7-9月浪况最佳，海边有多家冲浪学校提供初学者课程。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">东瀛<span>漫游</span></div>
+        <p style="margin-top: 0.8rem; font-size: 0.85rem;">日本七日旅行手记 · 2026 Spring</p>
+      </div>
+      <div class="footer-quote">
+        "旅行不是逃离生活，而是让生活以另一种方式拥抱你。"
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 东瀛漫游 · 仅供个人参考使用</span>
+      <a href="#hero" class="back-top">
+        <span>返回顶部</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ===== Nav Scroll State =====
+  var nav = document.getElementById('nav');
+  var heroBg = document.getElementById('heroBg');
+
+  function onScroll() {
+    var y = window.scrollY;
+    if (y > 60) { nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+    // Parallax hero bg
+    if (heroBg && y < window.innerHeight) {
+      heroBg.style.transform = 'scale(1.05) translateY(' + (y * 0.4) + 'px)';
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ===== Mobile Menu =====
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function() {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // ===== Scroll Reveal =====
+  try {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+  } catch(e) {
+    // Fallback: reveal everything
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      el.classList.add('visible');
+    });
+  }
+
+  // ===== Food Filter =====
+  var foodBtns = document.querySelectorAll('.food-btn');
+  var foodCards = document.querySelectorAll('.food-card');
+
+  foodBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var cat = btn.getAttribute('data-cat');
+      foodBtns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      foodCards.forEach(function(card) {
+        var cardCat = card.getAttribute('data-cat');
+        if (cat === 'all' || cardCat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // ===== Lightbox =====
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  var lightboxCaption = document.getElementById('lightboxCaption');
+  var lightboxClose = document.getElementById('lightboxClose');
+  var galleryItems = document.querySelectorAll('.gallery-item');
+
+  galleryItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+      var src = item.getAttribute('data-src');
+      var caption = item.getAttribute('data-caption') || '';
+      lightboxImg.src = src;
+      lightboxImg.alt = caption;
+      lightboxCaption.textContent = caption;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function() { lightboxImg.src = ''; }, 400);
+  }
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function(e) {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+
+  // ===== Smooth Anchor Offset =====
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      var target = document.querySelector(targetId);
+      if (target) {
+        e.preventDefault();
+        var offset = targetId === '#hero' ? 0 : target.offsetTop - 60;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
